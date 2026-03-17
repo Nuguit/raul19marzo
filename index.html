@@ -263,7 +263,7 @@
     /* ── PANTALLA 2 — PUZZLE ── */
     #screen2 {
       padding: 24px 0;
-      overflow-y: auto;
+      overflow: hidden;
     }
     #puzzle {
       display: grid;
@@ -274,6 +274,7 @@
       border-radius: 10px;
       margin: 12px auto;
       box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+      touch-action: none;
     }
     .puzzle-cell {
       width: 75px;
@@ -283,6 +284,7 @@
       background-size: 300px 400px;
       background-repeat: no-repeat;
       transition: opacity 0.15s, transform 0.15s;
+      touch-action: none;
     }
     .puzzle-cell:hover { transform: scale(1.03); z-index: 1; }
     .puzzle-cell.dragging { opacity: 0.25; cursor: grabbing; transform: scale(0.95); }
