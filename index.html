@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz día guapo!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Yesteryear&family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.06); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Yesteryear', cursive;
+      background-color: #3FB988;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* ── TÍTULOS ── */
+    .screen h1 {
+      font-family: 'Yesteryear', cursive;
+      font-size: clamp(2rem, 7vw, 3.2rem);
+      margin: 0 0 8px;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.25), 0 1px 0 rgba(255,255,255,0.15);
+      letter-spacing: 1px;
+      animation: fadeInDown 0.6s ease both;
+    }
+    .screen h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1rem, 3.5vw, 1.3rem);
+      font-weight: 600;
+      margin: 8px 20px;
+      opacity: 0.92;
+      animation: fadeInDown 0.7s ease both;
+    }
+    p, .screen p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.88rem, 2.5vw, 1rem);
+      line-height: 1.65;
+      max-width: 480px;
+      margin: 6px auto;
+      opacity: 0.9;
+      animation: fadeInUp 0.8s ease both;
+      padding: 0 20px;
+    }
+
+    /* ── PANTALLAS ── */
+    .screen {
+      display: none;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .active { display: flex; }
+
+    /* ── BOTÓN PRINCIPAL ── */
+    button {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(16px, 4vw, 20px);
+      padding: 13px 36px;
+      margin-top: 24px;
+      cursor: pointer;
+      border-radius: 50px;
+      border: none;
+      color: white;
+      background: linear-gradient(135deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.08) 100%);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.3);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+      animation: fadeInUp 0.9s ease both;
+    }
+    button:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+    button:active { transform: scale(0.97); }
+
+    /* ── PANTALLA 1 ── */
+    #screen1 h1 {
+      font-size: clamp(2.6rem, 10vw, 4.5rem);
+      animation: fadeInDown 0.7s ease both;
+    }
+    #screen1 button {
+      font-size: clamp(18px, 5vw, 24px);
+      padding: 16px 56px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.1) 100%);
+      animation: pulse 2.4s ease-in-out 1s infinite, fadeInUp 0.9s ease both;
+    }
+
+    /* ── RESPUESTAS ── */
+    .answer-btn {
+      display: block;
+      width: min(300px, 90vw);
+      margin: 10px auto 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(14px, 3.5vw, 16px);
+      font-weight: 600;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.55);
+      border-radius: 50px;
+      padding: 14px 22px;
+      letter-spacing: 0.4px;
+      text-transform: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+      animation: none;
+    }
+    .answer-btn:hover {
+      background: rgba(255,255,255,0.28);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    }
+
+    /* ── FEEDBACK INCORRECTO ── */
+    #wrongFeedback {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 14px;
+    }
+    #wrongFeedback img {
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+    #wrongFeedback p {
+      font-weight: 700;
+      font-size: clamp(15px, 4vw, 18px);
+      margin: 10px 0 0;
+      color: #fff3a0;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+
+    /* ── CAJA FUERTE ── */
+    .safe-panel {
+      background: radial-gradient(ellipse at 30% 25%, #4e4e4e, #141414);
+      border: 5px solid #8a7340;
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow:
+        0 0 0 3px #c9a84c,
+        0 12px 40px rgba(0,0,0,0.6),
+        inset 0 2px 6px rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      margin-top: 20px;
+      width: min(300px, 92vw);
+    }
+    .safe-hint {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      color: #c9a84c;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #c9a84c, #f0d080, #c9a84c);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s linear infinite;
+    }
+    .safe-dials { display: flex; gap: 14px; }
+    .safe-dial {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .dial-btn {
+      background: linear-gradient(180deg, #606060, #303030);
+      border: 2px solid #8a7340;
+      border-radius: 8px;
+      color: #c9a84c;
+      font-size: 18px;
+      width: 54px;
+      height: 32px;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+      transition: background 0.1s, transform 0.1s;
+    }
+    .dial-btn:hover {
+      background: linear-gradient(180deg, #707070, #404040);
+      transform: scale(1.08);
+    }
+    .dial-btn:active { transform: scale(0.95); }
+    .dial-display {
+      width: 54px;
+      height: 68px;
+      background: #060606;
+      border: 2px solid #8a7340;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Courier New', monospace;
+      font-size: 38px;
+      font-weight: bold;
+      color: #c9a84c;
+      text-shadow: 0 0 14px rgba(201,168,76,0.8), 0 0 4px rgba(201,168,76,0.4);
+      box-shadow: inset 0 3px 10px rgba(0,0,0,0.9), 0 0 6px rgba(201,168,76,0.15);
+    }
+    #safeSubmit {
+      background: linear-gradient(135deg, #a08840, #5a4a20);
+      border: 2px solid #c9a84c;
+      border-radius: 50px;
+      color: #fff8e0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      padding: 12px 36px;
+      cursor: pointer;
+      text-transform: uppercase;
+      margin-top: 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+    }
+    #safeSubmit:hover {
+      background: linear-gradient(135deg, #b89a50, #6a5a30);
+      transform: translateY(-2px);
+      box-shadow: 0 7px 22px rgba(0,0,0,0.45);
+    }
+    #safeSubmit:active { transform: scale(0.96); }
+    #codeError {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #ff8080;
+      display: none;
+      margin-top: -10px;
+      text-shadow: 0 0 8px rgba(255,80,80,0.4);
+    }
+
+    /* ── PANTALLA 2 — PUZZLE ── */
+    #screen2 {
+      padding: 24px 0;
+      overflow-y: auto;
+    }
+    #puzzle {
+      display: grid;
+      grid-template-columns: repeat(4, 75px);
+      gap: 3px;
+      background: rgba(0,0,0,0.35);
+      padding: 3px;
+      border-radius: 10px;
+      margin: 12px auto;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+    }
+    .puzzle-cell {
+      width: 75px;
+      height: 133px;
+      cursor: grab;
+      background-image: url('puzzle.jpeg');
+      background-size: 300px 400px;
+      background-repeat: no-repeat;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .puzzle-cell:hover { transform: scale(1.03); z-index: 1; }
+    .puzzle-cell.dragging { opacity: 0.25; cursor: grabbing; transform: scale(0.95); }
+    .puzzle-cell.over {
+      outline: 3px solid rgba(255,255,255,0.9);
+      outline-offset: -3px;
+      border-radius: 2px;
+    }
+
+    /* ── PANTALLA 5 — FINAL ── */
+    #screen5 {
+      background: radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.12) 0%, transparent 70%);
+    }
+    #screen5 h1 {
+      font-size: clamp(2rem, 8vw, 3.6rem);
+    }
+    #screen5 p {
+      font-size: clamp(0.92rem, 2.6vw, 1.05rem);
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    /* ── BINGO BTN ── */
+    #bingoBtn {
+      background: linear-gradient(135deg, #ff2d8a, #ff6aaa) !important;
+      border: none !important;
+      animation: pulse 1.6s ease-in-out infinite !important;
+      box-shadow: 0 6px 28px rgba(255,0,128,0.45) !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- PANTALLA 1 -->
+<div class="screen active" id="screen1">
+  <h1>¿Listo para jugar? 😏</h1>
+  <button onclick="nextScreen(2)">PLAY</button>
+</div>
+
+<!-- PANTALLA 2 PUZZLE -->
+<div class="screen" id="screen2">
+  <h1>Ordena la imagen</h1>
+  <div id="puzzle"></div>
+  <button id="nextPuzzle" style="display:none" onclick="nextScreen(3)">Siguiente</button>
+</div>
+
+<!-- PANTALLA 3 PREGUNTA -->
+<div class="screen" id="screen3">
+  <div id="questionContent">
+    <h1>Pregunta importante 😄</h1>
+    <p>¿Cuál es el mejor regalo para súper Noa?</p>
+    <div id="answers">
+      <button class="answer-btn" onclick="checkAnswer(false)">Un libro de contabilidad</button>
+      <button class="answer-btn" onclick="checkAnswer(true)">Una súper cama elástica</button>
+      <button class="answer-btn" onclick="checkAnswer(false)">Una declaración de la renta</button>
+    </div>
+    <div id="wrongFeedback">
+      <img src="fallo.png" alt="fallo" width="180">
+      <p>¡Venga ya! Prueba otra vez</p>
+    </div>
+  </div>
+  <div id="correctFeedback" style="display:none">
+    <div style="font-size:60px">🥳🥳🥳🥳</div>
+  </div>
+  <button id="nextQuestion" style="display:none" onclick="nextScreen(4)">Siguiente</button>
+</div>
+
+<!-- PANTALLA 4 CODIGO -->
+<div class="screen" id="screen4">
+  <h1>Introduce el código</h1>
+  <p>Pista: es el día más guay del año, hoy</p>
+  <div class="safe-panel">
+    <div class="safe-hint">🔒 Combinación secreta</div>
+    <div class="safe-dials">
+      <div class="safe-dial">
+        <button class="dial-btn" onclick="changeDial(0, 1)">▲</button>
+        <div class="dial-display" id="dial0">0</div>
+        <button class="dial-btn" onclick="changeDial(0, -1)">▼</button>
+      </div>
+      <div class="safe-dial">
+        <button class="dial-btn" onclick="changeDial(1, 1)">▲</button>
+        <div class="dial-display" id="dial1">0</div>
+        <button class="dial-btn" onclick="changeDial(1, -1)">▼</button>
+      </div>
+      <div class="safe-dial">
+        <button class="dial-btn" onclick="changeDial(2, 1)">▲</button>
+        <div class="dial-display" id="dial2">0</div>
+        <button class="dial-btn" onclick="changeDial(2, -1)">▼</button>
+      </div>
+      <div class="safe-dial">
+        <button class="dial-btn" onclick="changeDial(3, 1)">▲</button>
+        <div class="dial-display" id="dial3">0</div>
+        <button class="dial-btn" onclick="changeDial(3, -1)">▼</button>
+      </div>
+    </div>
+    <div id="codeError">Combinación incorrecta. Inténtalo de nuevo.</div>
+    <button id="safeSubmit" onclick="checkCode()">ABRIR</button>
+  </div>
+  <button id="bingoBtn" style="display:none; font-size:28px; background:#ff0080; border-color:#ff0080;" onclick="nextScreen(5)">🎉 BINGO! 🎉</button>
+</div>
+
+<!-- PANTALLA 5 FINAL -->
+<div class="screen" id="screen5">
+  <h1>Feliz santo y feliz día del padre! ❤️</h1>
+  <h2>Eres un padre dedicado, atento y cariñoso, no lo olvides nunca.</h2>
+  <p>Hoy es el día en el que Noa decidió hacerte padre, y sé que no es casualidad.
+Eres el mejor padre del mundo, y Noa es la niña más afortunada por tenerte.
+Que en ella encuentres siempre el amor y el orgullo que siente tu padre por ti, desde ahí arriba.
+Que nadie te quite la sonrisa de la cara hoy.</p>
+</div>
+
+<script>
+function nextScreen(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen' + n).classList.add('active');
+}
+
+// PUZZLE — recortes de puzzle.jpeg mediante background-position
+// Imagen 300x400 dividida en 4 cols x 3 filas → pieza 75x133px
+const piecePos = {
+  'A1': '0px 0px',    'A2': '-75px 0px',   'A3': '-150px 0px',  'A4': '-225px 0px',
+  'B1': '0px -133px', 'B2': '-75px -133px', 'B3': '-150px -133px','B4': '-225px -133px',
+  'C1': '0px -267px', 'C2': '-75px -267px', 'C3': '-150px -267px','C4': '-225px -267px'
+};
+
+const correctOrder = ['A1','A2','A3','A4','B1','B2','B3','B4','C1','C2','C3','C4'];
+let order = [...correctOrder].sort(() => Math.random() - 0.5);
+let dragSrc = null;
+
+function renderPuzzle() {
+  const puzzle = document.getElementById('puzzle');
+  puzzle.innerHTML = '';
+  order.forEach((p, i) => {
+    const cell = document.createElement('div');
+    cell.className = 'puzzle-cell';
+    cell.draggable = true;
+    cell.dataset.index = i;
+    cell.style.backgroundPosition = piecePos[p];
+
+    // Drag & drop (escritorio)
+    cell.addEventListener('dragstart', () => { dragSrc = i; cell.classList.add('dragging'); });
+    cell.addEventListener('dragend',   () => cell.classList.remove('dragging'));
+    cell.addEventListener('dragover',  e => { e.preventDefault(); cell.classList.add('over'); });
+    cell.addEventListener('dragleave', () => cell.classList.remove('over'));
+    cell.addEventListener('drop', e => {
+      e.preventDefault();
+      cell.classList.remove('over');
+      if (dragSrc !== null && dragSrc !== i) swap(dragSrc, i);
+    });
+
+    // Touch (móvil)
+    cell.addEventListener('touchstart', () => {
+      dragSrc = i;
+      cell.classList.add('dragging');
+    }, { passive: true });
+    cell.addEventListener('touchend', e => {
+      cell.classList.remove('dragging');
+      const touch = e.changedTouches[0];
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+      const destCell = target && target.closest('.puzzle-cell');
+      if (destCell) {
+        const destIndex = parseInt(destCell.dataset.index);
+        if (!isNaN(destIndex) && destIndex !== dragSrc) swap(dragSrc, destIndex);
+      }
+    });
+
+    puzzle.appendChild(cell);
+  });
+}
+
+function swap(a, b) {
+  [order[a], order[b]] = [order[b], order[a]];
+  renderPuzzle();
+  if (JSON.stringify(order) === JSON.stringify(correctOrder)) {
+    document.getElementById('nextPuzzle').style.display = 'block';
+  }
+}
+
+renderPuzzle();
+
+// PREGUNTA
+function checkAnswer(correct) {
+  if (correct) {
+    document.getElementById('questionContent').style.display = 'none';
+    document.getElementById('correctFeedback').style.display = 'block';
+    document.getElementById('nextQuestion').style.display = 'block';
+  } else {
+    document.getElementById('wrongFeedback').style.display = 'flex';
+  }
+}
+
+// CODIGO — diales de caja fuerte
+const dialValues = [0, 0, 0, 0];
+
+function changeDial(index, dir) {
+  dialValues[index] = (dialValues[index] + dir + 10) % 10;
+  document.getElementById('dial' + index).textContent = dialValues[index];
+}
+
+function checkCode() {
+  const code = dialValues.join('');
+  if (code === '1903') {
+    document.querySelector('.safe-panel').style.display = 'none';
+    document.getElementById('bingoBtn').style.display = 'inline-block';
+  } else {
+    const err = document.getElementById('codeError');
+    err.style.display = 'block';
+    setTimeout(() => err.style.display = 'none', 2000);
+  }
+}
+</script>
+
+</body>
+</html>
