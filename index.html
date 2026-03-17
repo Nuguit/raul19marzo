@@ -301,6 +301,13 @@
       outline-offset: -3px;
       border-radius: 2px;
     }
+    .puzzle-cell.selected {
+      outline: 3px solid #ffec40;
+      outline-offset: -3px;
+      transform: scale(1.06);
+      z-index: 2;
+      box-shadow: 0 0 14px rgba(255,236,64,0.7);
+    }
 
     /* ── PANTALLA 5 — FINAL ── */
     #screen5 {
@@ -335,6 +342,7 @@
 <!-- PANTALLA 2 PUZZLE -->
 <div class="screen" id="screen2">
   <h1>Ordena la imagen</h1>
+  <p style="font-family:'Montserrat',sans-serif;font-size:clamp(0.75rem,2.5vw,0.9rem);opacity:0.85;margin:0 16px 10px;line-height:1.5;">Toca la pieza que quieras mover y, después, el sitio que le corresponde para hacer el puzzle</p>
   <div id="puzzle"></div>
   <button id="nextPuzzle" style="display:none" onclick="nextScreen(3)">Siguiente</button>
 </div>
@@ -421,6 +429,7 @@ const piecePos = {
 const correctOrder = ['A1','A2','A3','A4','B1','B2','B3','B4','C1','C2','C3','C4'];
 let order = [...correctOrder].sort(() => Math.random() - 0.5);
 let dragSrc = null;
+let selectedIndex = null;
 
 function renderPuzzle() {
   const puzzle = document.getElementById('puzzle');
@@ -431,6 +440,7 @@ function renderPuzzle() {
     cell.draggable = true;
     cell.dataset.index = i;
     cell.style.backgroundPosition = piecePos[p];
+    if (i === selectedIndex) cell.classList.add('selected');
 
     // Drag & drop (escritorio)
     cell.addEventListener('dragstart', () => { dragSrc = i; cell.classList.add('dragging'); });
@@ -443,26 +453,19 @@ function renderPuzzle() {
       if (dragSrc !== null && dragSrc !== i) swap(dragSrc, i);
     });
 
-    // Touch (móvil)
-    cell.addEventListener('touchstart', e => {
-      e.preventDefault();
-      dragSrc = i;
-      cell.classList.add('dragging');
-    }, { passive: false });
-    cell.addEventListener('touchmove', e => {
-      e.preventDefault();
-    }, { passive: false });
-    cell.addEventListener('touchend', e => {
-      e.preventDefault();
-      cell.classList.remove('dragging');
-      const touch = e.changedTouches[0];
-      const target = document.elementFromPoint(touch.clientX, touch.clientY);
-      const destCell = target && target.closest('.puzzle-cell');
-      if (destCell) {
-        const destIndex = parseInt(destCell.dataset.index);
-        if (!isNaN(destIndex) && destIndex !== dragSrc) swap(dragSrc, destIndex);
+    // Toque (móvil): toca una pieza para seleccionarla, toca otra para intercambiar
+    cell.addEventListener('click', () => {
+      if (selectedIndex === null) {
+        selectedIndex = i;
+        renderPuzzle();
+      } else if (selectedIndex === i) {
+        selectedIndex = null;
+        renderPuzzle();
+      } else {
+        swap(selectedIndex, i);
+        selectedIndex = null;
       }
-    }, { passive: false });
+    });
 
     puzzle.appendChild(cell);
   });
