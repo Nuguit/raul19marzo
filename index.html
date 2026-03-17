@@ -29,13 +29,20 @@
 
     * { box-sizing: border-box; }
 
+    html {
+      height: 100%;
+      overscroll-behavior: none;
+    }
+
     body {
       margin: 0;
+      height: 100%;
       font-family: 'Yesteryear', cursive;
       background-color: #3FB988;
       color: white;
       text-align: center;
-      overflow-x: hidden;
+      overflow: hidden;
+      overscroll-behavior: none;
     }
 
     /* ── TÍTULOS ── */
@@ -69,7 +76,8 @@
     /* ── PANTALLAS ── */
     .screen {
       display: none;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
       justify-content: center;
       align-items: center;
       flex-direction: column;
