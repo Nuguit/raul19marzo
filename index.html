@@ -434,11 +434,16 @@ function renderPuzzle() {
     });
 
     // Touch (móvil)
-    cell.addEventListener('touchstart', () => {
+    cell.addEventListener('touchstart', e => {
+      e.preventDefault();
       dragSrc = i;
       cell.classList.add('dragging');
-    }, { passive: true });
+    }, { passive: false });
+    cell.addEventListener('touchmove', e => {
+      e.preventDefault();
+    }, { passive: false });
     cell.addEventListener('touchend', e => {
+      e.preventDefault();
       cell.classList.remove('dragging');
       const touch = e.changedTouches[0];
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
@@ -447,7 +452,7 @@ function renderPuzzle() {
         const destIndex = parseInt(destCell.dataset.index);
         if (!isNaN(destIndex) && destIndex !== dragSrc) swap(dragSrc, destIndex);
       }
-    });
+    }, { passive: false });
 
     puzzle.appendChild(cell);
   });
