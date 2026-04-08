@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>100 días-100 razones</title>
+    <link rel="icon" type="image/jpg" href="/favicon.jpg" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&amp;family=Plus+Jakarta+Sans:wght@400;600&amp;family=Space+Grotesk:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8B1A2F",
+                        "on-primary": "#FFFFFF",
+                        "primary-container": "#FFD6DC",
+                        "on-primary-container": "#8B1A2F",
+                        "secondary": "#C4556A",
+                        "on-secondary": "#FFFFFF",
+                        "secondary-container": "#4A2030",
+                        "on-secondary-container": "#FFB3BC",
+                        "tertiary": "#A05060",
+                        "on-tertiary": "#FFFFFF",
+                        "tertiary-container": "#3D1A22",
+                        "on-tertiary-container": "#FFD0D8",
+                        "background": "#120D0F",
+                        "on-background": "#FAF0F3",
+                        "surface": "#1C1418",
+                        "on-surface": "#FAF0F3",
+                        "surface-variant": "#3D2830",
+                        "on-surface-variant": "#C4A8B0",
+                        "surface-container-lowest": "#FFFFFF",
+                        "surface-container-low": "#1A1215",
+                        "surface-container": "#221820",
+                        "surface-container-high": "#2C1F25",
+                        "surface-container-highest": "#3A2830",
+                        "surface-dim": "#0E0A0C",
+                        "surface-bright": "#2A1E22",
+                        "surface-tint": "#8B1A2F",
+                        "outline": "#7A5862",
+                        "outline-variant": "#4A3840",
+                        "inverse-surface": "#FAF0F3",
+                        "inverse-on-surface": "#120D0F",
+                        "inverse-primary": "#FFB3BC",
+                        "error": "#CF6679",
+                        "on-error": "#FFFFFF",
+                        "error-container": "#4A0015",
+                        "on-error-container": "#FFB3BC",
+                    },
+                    fontFamily: {
+                        "headline": ["Epilogue", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+            height: 220px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.active .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card.active {
+            z-index: 50;
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        .card-number {
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .flip-card:hover .card-number {
+            transform: scale(1.08);
+            text-shadow: 0 2px 20px rgba(139, 26, 47, 0.9), 0 1px 4px rgba(0, 0, 0, 0.95) !important;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #120D0F;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #8B1A2F;
+            border-radius: 10px;
+        }
+
+        .hero-glow {
+            background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139, 26, 47, 0.12) 0%, transparent 70%);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body min-h-screen">
+    <!-- Top AppBar -->
+    <header class="bg-background/80 backdrop-blur-md sticky top-0 z-40 border-b border-outline-variant/30">
+        <div class="flex items-center p-4 pb-2 justify-between max-w-7xl mx-auto">
+            <div class="text-primary flex size-12 shrink-0 items-center justify-center">
+                <span class="material-symbols-outlined"
+                    style="font-variation-settings: 'FILL' 1; font-size: 32px;">favorite</span>
+            </div>
+            <h2
+                class="text-on-surface text-lg font-headline font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">
+                100 días</h2>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        <section class="text-center py-12 hero-glow">
+            <h1 class="text-on-surface font-headline tracking-tight text-5xl md:text-6xl font-bold leading-tight mb-4">
+                100 razones...</h1>
+            <p class="text-on-surface-variant text-lg font-normal max-w-2xl mx-auto leading-relaxed">...por las que eres
+                el mejor. 100 días no son nada, y al mismo tiempo han sido suficientes para tener 100 razones para
+                elegirte.</p>
+            <div class="mt-6 w-20 h-px bg-primary mx-auto opacity-50"></div>
+        </section>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="card-grid">
+
+            <script>
+                const phrases = [
+                    "Porque desde que llegaste, todo tiene más sentido.", "Porque eres lo primero en lo que pienso al despertarme.", "Porque también eres lo último en lo que pienso antes de dormir.", "Porque me encanta despertarme con tu audio de buenos días.", "Porque esos audios me alegran el día entero.", "Porque tienes un pelo precioso.", "Porque te querría igual aunque te quedaras calvo.", "Porque me haces reír incluso hablando de caca.", "Porque conviertes lo absurdo en algo nuestro.", "Porque tienes una forma única de hacerme feliz.",
+                    "Porque eres un padre increíble.", "Porque eres el mejor papá que Noa podría tener.", "Porque eso dice muchísimo de quién eres.", "Porque eres un hijo maravilloso.", "Porque has sabido serlo incluso con las putadas de la vida.", "Porque tu forma de querer nace de ahí también.", "Porque eres fuerte sin dejar de ser sensible.", "Porque me transmites calma.", "Porque me haces sentir en casa.", "Porque conmigo eres real.",
+                    "Porque me escuchas de verdad.", "Porque me entiendes incluso cuando no sé explicarme.", "Porque me haces reír sin esfuerzo.", "Porque me haces sentir especial.", "Porque me cuidas aún a distancia.", "Porque me respetas siempre.", "Porque me haces sentir tranquila.", "Porque me das paz.", "Porque me haces sentir querida.", "Porque me haces sentir importante.",
+                    "Porque eres el mejor electricista.", "Porque me encanta verte hacer lo que se te da bien.", "Porque tienes talento en lo tuyo.", "Porque eres trabajador.", "Porque me encanta que me cuentes cosas de tu trabajo y escucharte embobada.", "Porque sabes arreglar cosas… incluso días malos.", "Porque me gusta cómo te enfrentas a la vida.", "Porque tienes iniciativa.", "Porque eres constante.", "Porque eres de verdad.",
+                    "Porque me hace ilusión verte y no puedo esperar.", "Porque cualquier plan contigo es el mejor plan.", "Porque me encanta compartir tiempo contigo, aunque sea por teléfono.", "Porque me gusta cómo me miras y quiero que lo hagas todos los días.", "Porque me gusta cómo me hablas.", "Porque me gusta cómo me tratas.", "Porque me haces sentir única.", "Porque me haces sentir segura.", "Porque confío en ti.", "Porque me aportas.",
+                    "Porque me gusta quién soy contigo en mi vida.", "Porque me haces crecer.", "Porque me haces pensar.", "Porque me haces sentir.", "Porque me haces querer más.", "Porque me haces mejor.", "Porque sumas en mi vida.", "Porque no complicas las cosas.", "Porque contigo todo fluye.", "Porque me haces feliz.",
+                    "Porque me gusta compartir silencios contigo.", "Porque me gusta reírme contigo.", "Porque me gusta todo de ti (sí, lo de la caca también).", "Porque eso también es intimidad.", "Porque conmigo te muestras tal cual eres.", "Porque no finges.", "Porque eres auténtico.", "Porque eres cercano.", "Porque eres natural.", "Porque eres como eres.",
+                    "Porque me encanta descubrirte poco a poco.", "Porque cada día tienes algo nuevo.", "Porque nunca me aburro contigo.", "Porque me sorprendes.", "Porque tienes algo especial.", "Porque tienes algo que no sé explicar.", "Porque me enganchas.", "Porque me calmas.", "Porque me equilibras.", "Porque me llenas.",
+                    "Porque quiero vivir mil viajes contigo.", "Porque quiero descubrir el mundo a tu lado.", "Porque quiero perderme contigo.", "Porque quiero construir recuerdos juntos.", "Porque quiero compartir caminos.", "Porque quiero que seas mi compañero.", "Porque quiero que estés en mis planes.", "Porque quiero estar en los tuyos.", "Porque me ilusiona el \u201cnosotros\u201d.", "Porque merece la pena.",
+                    "Porque estos 100 días han sido increíbles.", "Porque han sido de verdad.", "Porque no han sido fáciles, pero siempre merecen la pena porque eres tú.", "Porque han sido nuestros.", "Porque han sido solo el principio.", "Porque quiero seguir sumando días contigo en mi vida, de la forma que sea.", "Porque quiero seguir despertándome con tu voz, aunque no sea en persona.", "Porque quiero seguir riéndome contigo.", "Porque quiero seguir eligiéndote.", "Porque eres tú ❤️"
+                ];
+
+                const images = [
+                    "WhatsApp Image 2026-03-25 at 19.39.06.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.07.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.08 (1).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.08 (2).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.08 (3).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.08 (4).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.08 (5).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.08 (6).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.08 (7).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.08.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.09 (1).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.09 (10).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.09 (2).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.09 (3).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.09 (4).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.09 (5).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.09 (6).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.09 (7).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.09 (8).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.09 (9).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.09.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.10 (1).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.10 (2).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.10 (3).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.10 (4).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.10 (5).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.10 (6).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.10 (7).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.10 (8).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.10 (9).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.10.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.11 (1).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.11 (10).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.11 (2).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.11 (3).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.11 (4).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.11 (5).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.11 (6).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.11 (7).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.11 (8).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.11 (9).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.11.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.12 (1).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.12 (2).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.12 (3).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.12 (4).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.12 (5).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.12 (6).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.12 (7).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.12 (8).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.12 (9).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.12.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.13 (1).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.13 (2).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.13 (3).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.13 (4).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.13 (5).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.13 (6).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.13 (7).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.13 (8).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.13 (9).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.13.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.14 (1).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.14 (10).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.14 (2).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.14 (3).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.14 (4).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.14 (5).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.14 (6).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.14 (7).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.14 (8).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.14 (9).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.14.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.39.15.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.34.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.35 (1).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.35 (2).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.35 (3).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.35.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.36 (1).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.36 (2).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.36 (3).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.36 (4).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.36 (5).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.36 (6).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.36 (7).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.36 (8).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.36.jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.37 (1).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.37 (2).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.37 (3).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.37 (4).jpeg",
+                    "WhatsApp Image 2026-03-25 at 19.56.37.jpeg",
+                    "WhatsApp Image 2026-03-25 at 20.06.19 (1).jpeg",
+                    "WhatsApp Image 2026-03-25 at 20.06.19 (2).jpeg",
+                    "WhatsApp Image 2026-03-25 at 20.06.19 (3).jpeg",
+                    "WhatsApp Image 2026-03-25 at 20.06.19 (4).jpeg",
+                    "WhatsApp Image 2026-03-25 at 20.06.19 (5).jpeg",
+                    "WhatsApp Image 2026-03-25 at 20.06.19 (6).jpeg",
+                    "WhatsApp Image 2026-03-25 at 20.06.19.jpeg"
+                ];
+
+                const container = document.getElementById('card-grid');
+                phrases.forEach((phrase, index) => {
+                    const cardNum = index + 1;
+                    const imageName = images[index];
+                    const encodedImagePath = 'imagenes/' + encodeURIComponent(imageName);
+                    const card = document.createElement('div');
+                    card.className = 'flip-card';
+                    card.onclick = function () { this.classList.toggle('active'); };
+
+                    const cardHtml = `
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('${encodedImagePath}'); background-size: cover; background-position: center;">
+                                <div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);border-radius:1rem;"></div>
+                                <span class="card-number font-label font-bold" style="position:relative;z-index:10;font-size:4.5rem;line-height:1;color:#8B1A2F;text-shadow:0 2px 12px rgba(139,26,47,0.7),0 1px 4px rgba(0,0,0,0.95);">${cardNum.toString().padStart(3, '0')}</span>
+                            </div>
+                            <div class="flip-card-back" style="background:#FFFFFF;border:1px solid rgba(139,26,47,0.12);">
+                                <p class="font-body font-semibold text-lg leading-relaxed" style="color:#7A1728;">
+                                    ${phrase}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    card.innerHTML = cardHtml;
+                    container.appendChild(card);
+                });
+            </script>
+        </div>
+    </main>
+    <footer class="bg-surface-container-low mt-10 border-t border-outline-variant/20">
+        <div class="max-w-7xl mx-auto px-4 py-12 text-center">
+            <p class="text-primary font-headline font-bold text-xl mb-2">Hecho con amor para el bombonsito shiclanero ❤️
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
